@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<title>Contact Form - generated with Faary.com</title>
+<link rel="stylesheet" href="../static/css/faary.css" type="text/css" />
+<script type="text/javascript" src="../static/js/jquery.js"></script>
+{% block body %}
+<script src="../../static/js/modernizr-1.7.min.js"></script>  
+<link rel="stylesheet" type="text/css" href="../../static/css/reset.css" media="screen" title="html5doctor.com Reset Stylesheet" />
+<link rel="stylesheet" type="text/css" href="../../static/css/css3.css" media="screen" />
+    
+<link rel="stylesheet" type="text/css" href="../../static/css/general.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../../static/css/grid.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../../static/css/forms.css" media="screen" />
+
+
+
+<link rel="stylesheet" type="text/css" href="../../static/images/style.css" />
+<!-- jQuery -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+<!-- markItUp! -->
+<script type="text/javascript" src="../../static/markitup/jquery.markitup.js"></script>
+<!-- markItUp! toolbar settings -->
+<script type="text/javascript" src="../../static/markitup/sets/default/set.js"></script>
+<!-- markItUp! skin -->
+<link rel="stylesheet" type="text/css" href="../../static/markitup/skins/markitup/style.css" />
+<!--  markItUp! toolbar skin -->
+<link rel="stylesheet" type="text/css" href="../../static/markitup/sets/default/style.css" />
+
+
+
+
+
+<style>
+.iform {font: 12px/26px Verdana, Geneva, sans-serif; width:400px; margin:30px auto;}
+.iform ul { margin:0; padding:0; list-style:none;}
+.iform ul ul { overflow:auto}
+.iform li { padding-bottom:5px;}
+.iform label { 
+ width:130px; display:block; float:left; line-height:26px;
+}
+.iform label.ilabel { 
+ width:auto; display:inline; float:none; line-height:26px; padding:0 5px
+}
+.iform .itext,.iform .itextarea,.iform .iselect,.iform .ibutton {   
+    width:200px;
+    border:1px solid #999;
+    -webkit-border-radius: 3px;-khtml-border-radius:3px;-moz-border-radius:3px;border-radius:3px;
+    margin:0;
+    padding:5px;
+    background: #fff;
+    background: -webkit-gradient(linear, left top, left 25, from(#fff), color-stop(6%, #eee), to(#fff));
+    background: -moz-linear-gradient(top, #fff, #eee 2px, #fff 25px);
+    box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+    -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+    -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+}
+.iform .itext:hover,
+.iform .itextarea:hover,
+.iform .iselect:hover,
+.iform .ibutton:hover,
+.iform .itext:focus,
+.iform .itextarea:focus,
+.iform .iselect:focus,
+.iform .ibutton:focus {
+    border-color : #333;
+    background : #fff;}
+.iform .itext {
+
+}
+.iform .itextarea{ 
+    height:100px; width: 250px;
+}
+.iform .ibutton {
+    width:auto;
+    background: #efefef;
+    background: -webkit-gradient(linear, left top, left 25, from(#dadada), color-stop(6%, #efefef), to(#dadada));
+    background: -moz-linear-gradient(top, #dadada, #efefef 2px, #dadada 25px);
+    box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+}
+
+.iform .ibutton:hover,.iform .ibutton:focus { background:#dadada;}
+.iform li.iheader { display:block; font-size:18px; border-bottom:1px solid #000; padding:5px; text-indent:10px; margin:5px 0 15px }
+.iform li.iseparator { display:block; text-indent:-9999px; height:10px; line-height:10px; border-bottom:1px solid #999;margin:5px 0 15px }
+.iform .required { border-color:#F00; }
+</style>
+<style>
+.background {
+    background: #7dbae3; 
+    background-image: url("../../static/image1.jpeg"), url("../../static/image2.jpeg");
+    background-repeat: repeat-x, repeat;
+}
+</style>
+
+
+
+
+<form method="post" action="{{ url_for('marks.markstudent',studentid=session["studentid"]) }}"  class="iform">
+<ul>
+<li class="iheader">打分</li>
+<li><label for="">论文翻译</label><input class="itext" type="text" name="trans_thesis" id="trans_thesis" /></li>
+<li><label for="">论文</label><input class="itext" type="text" name="thesis" id="thesis" /></li>
+<input type="submit" class="button"  name="confirm" id="confirm" value="提交" /></li>
+</ul>
+</form>
+{% endblock %}
+
+
+

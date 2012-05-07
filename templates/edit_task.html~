@@ -1,0 +1,80 @@
+
+{% extends "base.html" %}
+
+{% block body %}
+<!--MarkitUP-->
+<title>编辑</title>
+<link rel="stylesheet" type="text/css" href="../static/images/style.css" />
+<!-- jQuery -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+<!-- markItUp! -->
+<script type="text/javascript" src="../static/markitup/jquery.markitup.js"></script>
+<!-- markItUp! toolbar settings -->
+<script type="text/javascript" src="../static/markitup/sets/default/set.js"></script>
+<!-- markItUp! skin -->
+<link rel="stylesheet" type="text/css" href="../static/markitup/skins/markitup/style.css" />
+<!--  markItUp! toolbar skin -->
+<link rel="stylesheet" type="text/css" href="../static/markitup/sets/default/style.css" />
+
+
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript">
+$(document).ready(function()	{
+	// Add markItUp! to your textarea in one line
+	// $('textarea').markItUp( { Settings }, { OptionalExtraSettings } );
+	$('#markItUp').markItUp(mySettings);
+	
+	// You can add content from anywhere in your page
+	// $.markItUp( { Settings } );	
+	$('.add').click(function() {
+ 		$.markItUp( { 	openWith:'<opening tag>',
+						closeWith:'<\/closing tag>',
+						placeHolder:"New content"
+					}
+				);
+ 		return false;
+	});
+	
+	// And you can add/remove markItUp! whenever you want
+	// $(textarea).markItUpRemove();
+	$('.toggle').click(function() {
+		if ($("#markItUp.markItUpEditor").length === 1) {
+ 			$("#markItUp").markItUpRemove();
+			$("span", this).text("get markItUp! back");
+		} else {
+			$('#markItUp').markItUp(mySettings);
+			$("span", this).text("remove markItUp!");
+		}
+ 		return false;
+	});
+});
+</script>
+
+
+  <form action="{{ url_for('st.edit')}}" method=post >
+              
+            <h3><legend>修改任务</legend></h3>
+            <input type="submit" value=发布 class="button">
+            </br>
+            <input type="text" name=taskname required="required" class="box_shadow" style="width:650px;height:30px" value={{ task.name }}/>
+
+            <!--textarea rows="20" cols="90" name=content placeholder="task content" class="textarea"  class="box_shadow">
+            </textarea-->
+
+           <textarea id="markItUp" cols="80" rows="20" name=content placeholder="publish tasks">
+           {{ task.content }}
+           </textarea>
+            {% for i in range(8)%}
+            	<div>
+            	</div>
+	    {% endfor%}
+
+           
+
+<form>
+{% endblock %}
+
+

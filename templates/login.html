@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block body %}
+    <section class="row" id="forms">
+	<h2 class="fontface">欢迎使用GMS系统</h2>
+	<form action="{{ url_for('app_login.login')}}" method=post class="col col_6">
+    	<fieldset>	
+        	<legend>Login</legend>
+            <div>
+            	<label for="num">Username</label>
+                <input type="text" name=num  placeholder="username" required="required" class="box_shadow"  />
+            </div>
+            <div>
+            	<label for="passwd">password</label>
+                <input type="password" name=passwd  placeholder="password" class="box_shadow" />
+            </div>
+            <input type="submit" value=Login class="button"/>
+        </fieldset>
+    </form>
+    <blockquote class="right" style="width:250px;">
+    GMS系统管理学生毕业设计的方方面面
+    方便老师，方便学生
+     </blockquote>
+     <div class="clear"></div>
+     <blockquote>
+     GMS系统使用开源技术Linux python flask 等等，成本更低，效率更高
+     </blockquote>
+  <div class="clear" style="height:15px;"></div><!-- clear -->
+	<div class="col_16 col">
+    	
+    </div><!-- col -->
+</section><!-- row -->
+
+    
+{% endblock %}
+

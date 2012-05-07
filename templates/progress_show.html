@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block body %}
+
+
+
+<script src="../static/js/modernizr-1.7.min.js"></script>  
+<link rel="stylesheet" type="text/css" href="../../static/css/reset.css" media="screen" title="html5doctor.com Reset Stylesheet" />
+<link rel="stylesheet" type="text/css" href="../../static/css/css3.css" media="screen" />
+    
+<link rel="stylesheet" type="text/css" href="../../static/css/general.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../../static/css/grid.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../../static/css/forms.css" media="screen" />
+
+
+<link rel="stylesheet" type="text/css" href="../../static/images/style.css" />
+<!-- markItUp! -->
+<script type="text/javascript" src="../../static/markitup/jquery.markitup.js"></script>
+<!-- markItUp! toolbar settings -->
+<script type="text/javascript" src="../../static/markitup/sets/default/set.js"></script>
+<!-- markItUp! skin -->
+<link rel="stylesheet" type="text/css" href="../../static/markitup/skins/markitup/style.css" />
+<!--  markItUp! toolbar skin -->
+<link rel="stylesheet" type="text/css" href="../../static/markitup/sets/default/style.css" />
+
+
+
+
+
+
+
+<!--Search Part-->
+<meta charset="utf-8"> 
+<style>
+.background {
+    background: #7dbae3; 
+    background-image: url("../../static/image1.jpeg"), url("../../static/image2.jpeg");
+    background-repeat: repeat-x, repeat;
+}
+</style>
+
+
+<div class="row">
+<section class="row" id="grid">
+        <div class="col col_1">&nbsp;&nbsp;</div>
+        <div class="col col_6"><h5>题目</h5></div>
+        <div class="col col_4"><h5>学生</h5></div>
+        <div class="col col_2"><h5>分数</h5></div>
+        <div class="col col_2"><h5>评分</h5></div>
+	{% if progresses%}
+	  {% for progress in progresses %}
+          <div class="row" style="height:80px">
+            <div class="col col_1">&nbsp;&nbsp;</div>
+            <div class="col col_6"><h5><a href="{{ url_for('progress.showdetail',pid= progress.id ) }}">{{ progress.name }}</a></h5></div>
+	    {% if progress.studentname %}
+            <div class="col col_4"><h5><a href="{{ url_for('pf.showinfo',userid=progress.studentnum) }}">{{ progress.studentname }}</a></h5></div>
+        {% endif %}
+            <li class="iheader"></li>
+            <div class="clear"></div>
+          </div><!-- row -->
+          <div class="row">
+          <hr size="15" align="left"  color="black">
+          </div>
+         {% endfor %}
+	{% else %}
+	  <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对不起 没有您要的结果</h3>
+	{% endif %}
+
+</section><!-- row -->
+<div>
+        {% for page in pagination.iter_pages() %}
+		<a href="{{ url_for_other_page(page) }}">{{ page }}</a>
+        {% endfor %}
+	{% macro render_pagination(pagination) %}
+		  <div class=pagination>
+		  {% for page in pagination.iter_pages() %}
+ 			   {% if page %}
+			     
+     			      {% if page == pagination.page %}
+   				      <a href="{{ url_for_other_page(page) }}">{{ page }}</a>
+  		              {% else %}
+    			              <strong>{{ page }}</strong>
+  		              {% endif %}
+          		   {% else %}
+    	         		  <span class=ellipsis>…</span>
+   		       	   {% endif %}
+ 		  {% endfor %}
+  		  {% if pagination.has_next %}
+   		        <a href="{{ url_for_other_page(pagination.page + 1)}}">Next &raquo;</a>
+ 	          {% endif %}
+  		  </div>
+	{% endmacro %}
+</div>	
+{% endblock %}
+
+

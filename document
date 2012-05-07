@@ -1,0 +1,88 @@
+gms graduation design management system
+Python 
+Flask framework
+SQLAlchemy ORM
+3-15:
+Create the gms database 
+create tables:
+users
+tasks
+
+create the first application:
+login.py  --SQLAlchemy session
+
+problem:
+1.session 
+2.make configuration files
+
+3-16:
+1.Finish the login part 50% simple test
+2.start the next application:Task selection app
+
+3-17-3-18:
+finish login
+publish task 40%
+select task 20%
+use blueprint
+
+make a global config need to run:
+export gms_settings = /home/yang/graduation/gms/settings.py
+
+3-19
+finish the publish task 
+make the configuration part
+
+3-20
+todo:
+finish the select part
+a.paginator
+b.show data
+c.ui
+d.Algorithm review
+
+
+3-23
+report part use reportlab:
+need to install first
+easy_install reportlab
+
+
+3-26
+if need the search part need to install 
+MMseg
+xapian
+
+4-1 日移植到Ubuntu 10.04成功
+4.2
+-完成分页
+-尽量完成搜索模块
+
+4-13 
+第一个模块基本功能完成（80）
+开始第二个模块
+
+4-19
+need to install mongodb-server
+mongodb-clients
+pymongo
+use pymongo and gridfs to store the pdf thesis files
+
+
+
+5-2:
+login --登录
+thesis -- 论文管理
+profile --个人信息管理
+task -- 毕设题目管理
+utils -- search engine and some other things
+marks -- 评分模块
+progress -- 进度管理
+models -- 数据库
+templates -- 所有html 
+static -- 所有静态文件
+document -- 描述
+run.py --网站的主脚本
+setup.py -- 网站安装部署脚本
+admin -- 管理员 管理
+
+bug one -- in task module the edit not response 

@@ -1,0 +1,17 @@
+        <div class="pagination">     
+            {% if page_object.page!=1%}
+                <a href="{{ url|markurl(page_object.page-1) }}" title="">上一页</a>
+            {% endif %}
+            {% raw %}
+            {% for i in page_object.page_range %}
+                {% if i==page_object.page %}
+                    <span class="current">{{i}}</span>
+                {% else %}
+                    <a href="{{ url|markurl(i) }}">{{i}}</a>
+                {% endif %}
+            {% endfor %}
+            {% endraw %}
+            {% if page_object.total>page_object.number[1] %}
+                <a href="{{ url|markurl(page_object.page+1) }}" title="">下一页</a>
+            {% endif %}
+        </div>

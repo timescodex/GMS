@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block body %}
+<script>
+function fileSelected() {
+  var file = document.getElementById('fileToUpload').files[0];
+  if (file) {
+    var fileSize = 0;
+    if (file.size > 1024 * 1024)
+      fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+    else
+      fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+          
+    document.getElementById('fileName').innerHTML = 'Name: ' + file.name;
+    document.getElementById('fileSize').innerHTML = 'Size: ' + fileSize;
+    document.getElementById('fileType').innerHTML = 'Type: ' + file.type;
+  }
+}
+</script>
+<div class="row">
+    请选择需要上传文件PDF档:
+</div>
+<div class="row">
+<form id="form1" method=POST enctype=multipart/form-data action="{{ url_for('thesis.upload_file') }}">
+    <input type=file name=file id='fileToUpload' >
+    <input type="submit" value="上传" class="button1">
+</div>
+</form>
+{% endblock %}
+

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block body %}
+
+<meta charset='UTF-8' />
+
+<link rel='stylesheet' type='text/css' href='../static/Firstpage/css/style.css' />
+
+<div id="page-wrap">
+
+	<h1>GMS 系统是一个开源毕业设计管理系统</h1>
+
+	<p>网站展示：</p>
+
+	<section class="image-gallery group">
+
+		<figure tabindex="1">
+			<img src="../static/Firstpage/images/p1.png" alt="jump, matey" />
+			<figcaption>选择课题</figcaption>
+		</figure>
+
+		<figure tabindex="2">
+			<img src="../static/Firstpage/images/p2.png" alt="jump, matey" />
+			<figcaption>发布课题</figcaption>
+		</figure>
+
+		<figure tabindex="3">
+			<img src="../static/Firstpage/images/p3.png" alt="jump, matey" />
+			<figcaption>查看课题</figcaption>
+		</figure>
+
+	</section>
+
+	<p>GMS系统很强大!</p>
+
+</div>
+
+
+
+{% endblock %}

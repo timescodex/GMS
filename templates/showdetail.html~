@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% block body %}
+<!--MarkitUP-->
+<title>编辑</title>
+
+<link rel="stylesheet" type="text/css" href="../../static/css/reset.css" media="screen" title="html5doctor.com Reset Stylesheet" />
+<link rel="stylesheet" type="text/css" href="../../static/css/css3.css" media="screen" />
+    
+<link rel="stylesheet" type="text/css" href="../../static/css/general.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../../static/css/grid.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../../static/css/forms.css" media="screen" />
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="../../static/images/style.css" />
+<!-- jQuery -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+<!-- markItUp! -->
+<script type="text/javascript" src="../../static/markitup/jquery.markitup.js"></script>
+<!-- markItUp! toolbar settings -->
+<script type="text/javascript" src="../../static/markitup/sets/default/set.js"></script>
+<!-- markItUp! skin -->
+<link rel="stylesheet" type="text/css" href="../../static/markitup/skins/markitup/style.css" />
+<!--  markItUp! toolbar skin -->
+<link rel="stylesheet" type="text/css" href="../../static/markitup/sets/default/style.css" />
+
+<style>
+.background {
+    background: #7dbae3; 
+    background-image: url("../../static/image1.jpeg"), url("../../static/image2.jpeg");
+    background-repeat: repeat-x, repeat;
+}
+</style>
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript">
+function submitFunction(i)
+{
+      if (i==1)
+      {
+          document.all.SubForm.action="{{ url_for('st.confirmselect') }}";
+      }
+      if (i==2)
+      {
+        document.all.SubForm.action="{{ url_for('st.delete') }}";
+      }
+      if (i==3) 
+      {
+          document.all.SubForm.action="{{ url_for('st.edit') }}";
+      }
+      document.all.SubForm.submit();
+
+}
+
+
+
+$(document).ready(function()	{
+	// Add markItUp! to your textarea in one line
+	// $('textarea').markItUp( { Settings }, { OptionalExtraSettings } );
+	$('#markItUp').markItUp(mySettings);
+	
+	// You can add content from anywhere in your page
+	// $.markItUp( { Settings } );	
+	$('.add').click(function() {
+ 		$.markItUp( { 	openWith:'<opening tag>',
+						closeWith:'<\/closing tag>',
+						placeHolder:"New content"
+					}
+				);
+ 		return false;
+	});
+	
+	// And you can add/remove markItUp! whenever you want
+	// $(textarea).markItUpRemove();
+	$('.toggle').click(function() {
+		if ($("#markItUp.markItUpEditor").length === 1) {
+ 			$("#markItUp").markItUpRemove();
+			$("span", this).text("get markItUp! back");
+		} else {
+			$('#markItUp').markItUp(mySettings);
+			$("span", this).text("remove markItUp!");
+		}
+ 		return false;
+	});
+});
+</script>
+<style type="text/css">
+.button {
+    -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+    box-shadow:inset 0px 1px 0px 0px #ffffff;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+    background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+    background-color:#ededed;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    border-radius:8px;
+    border:1px solid #dcdcdc;
+    display:inline-block;
+    color:#777777;
+    font-family:arial;
+    font-size:18px;
+    font-weight:bold;
+    padding:6px 24px;
+    text-decoration:none;
+    text-shadow:1px 1px 0px #ffffff;
+}.classname:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+    background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+    background-color:#dfdfdf;
+}.classname:active {
+    position:relative;
+    top:1px;
+}
+</style>
+         
+        <h4>题目：{{ task.name }}</h4>
+        </br>
+        <span class="information">posted on 11 16, 2010</span>
+        </br>
+        <span class="information">发布者 :{{ task.pub_teacher}}</span>
+        </br>
+        <form action="" method=post id="SubForm" name="SubForm">
+		{% if session["role"]=="student" %}
+                <input type="submit" value="选择" class="button" onclick="submitFunction(1);">
+		{% endif %}
+		{% if session["role"]=="teacher" %}
+                <input type="submit" value="删除" class="button" onclick="submitFunction(2);">
+                <input type="submit" value="修改" class="button" onclick="submitFunction(3);">
+		{% endif %}
+        </form>
+        内容:
+	<textarea id="markItUp" cols="80" rows="20" name=content readonly="readonly">
+            {{ task.content }}
+	</textarea>
+
+
+{% endblock %}
