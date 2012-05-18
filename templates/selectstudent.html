@@ -46,11 +46,13 @@
         <div class="col col_4"><h5>学生</h5></div>
         <div class="col col_2"><h5>分数</h5></div>
         <div class="col col_2"><h5>评分</h5></div>
-	{% if tasks%}
-	  {% for task in tasks %}
+	{% if tasks %}
+        {% for task in tasks %}
           <div class="row" style="height:80px">
-            <div class="col col_1">&nbsp;&nbsp;</div>
-            <div class="col col_6"><h5><a href="{{ url_for('st.showdetail',tid= task.id ) }}">{{ task.name }}</a></h5></div>
+              <div class="col col_1">&nbsp;&nbsp;</div>
+        {% if task.id %}
+        <div class="col col_6"><h5><a href="{{ url_for('st.showdetail',tid= task.id ) }}">{{ task.name }}</a></h5></div>
+        {% endif %}
 	    {% if task.studentname %}
             <div class="col col_4"><h5><a href="{{ url_for('pf.showinfo',userid=task.select_student) }}">{{ task.studentname }}</a></h5></div>
             {% if task.final_mark %}

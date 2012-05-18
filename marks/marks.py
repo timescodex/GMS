@@ -37,7 +37,6 @@ class SimplePagination(object):
                 last = num
 
 
-
 def get_task_for_page(students,page,PER_PAGE,count):
     #After get for the page 
     PER_PAGE = PER_PAGE
@@ -62,8 +61,12 @@ def get_tasks(stmt):
         tasks.append(row)
     return tasks
 
-
-
+def Markexist(studentid):
+    marks = session_connect.query(Marks).filter(Marks.studentnum==studentid).first()
+    if marks:
+        return True
+    else:
+        return False
 
 @marks.route("/selectstudent/",defaults={'page':1},methods=['GET','POST'])
 @marks.route("/selectstudent/<int:page>")
@@ -74,19 +77,11 @@ def selectstudent(page):
     task = {}
     tasks = []
     for row in session_connect.query(Task).filter(Task.pub_teacher==session["user"]).all():
-        #mark = session_connect.query(Marks).filter(Marks.studentnum==row.select_student).first()
-        #task["name"] = row.name
-        #task["pub_teacher"] = row.pub_teacher
-        #task["select_stduent"] = row.select_student
-        #s = select([Task,Marks],row.select_student==Marks.studentnum)
-        #task = get_tasks(s) 
-        task = session_connect.query(Task.id,Task.pub_teacher,Task.select_student,Task.name,Task.studentname,Task.teachername,Marks.studentnum,Marks.final_mark).filter(Marks.studentnum==row.select_student,Task.select_student==Marks.studentnum).first()
-        print dir(task)
-        #print task.final_mark
-        tasks.append(task)
-        #print mark.final_mark
-
-    #Paginator    
+        task = session_connect.query(Task).filter(Task.select_student==row.select_student).first()
+        if task:
+            tasks.append(task)
+        else:
+            pass
     task_page = get_task_for_page(tasks,page,PER_PAGE,len(tasks))
     p = SimplePagination(page,PER_PAGE,len(tasks))
     return render_template('selectstudent.html',pagination=p,tasks=task_page)
@@ -95,17 +90,35 @@ def selectstudent(page):
 @marks.route("/markstudent/<studentid>",methods=['GET','POST'])
 def markstudent(studentid):
     session["studentid"]=studentid
-    if studentid:
+    exist = Markexist(studentid)
+    if exist==False:
         if session["user"]:
             if request.method=="POST":
-                trans_mark = int(request.form["trans_thesis"])
+                #trans_mark = int(request.form["trans_thesis"])
                 thesis_mark = int(request.form["thesis"])
-                final_mark = trans_mark+thesis_mark
-                mark = Marks(studentnum=studentid,teachernum=session["user"],trans_mark=trans_mark,thesis_mark=thesis_mark,final_mark=final_mark)
+                final_mark = thesis_mark
+                mark = Marks(studentnum=studentid,teachernum=session["user"],thesis_mark=thesis_mark,final_mark=final_mark)
                 session_connect.add(mark)
                 session_connect.commit()
             
         return render_template("markstudent.html")
     else:
-        return redirect("marks.selectstudent")
-    
+        print "run into update!!!!!!"
+        mark = session_connect.query(Marks).filter(Marks.studentnum==studentid).first()
+        print "run here!!!!"
+        print mark.final_mark
+        if request.method=="POST":
+            thesis_mark = int(request.form["updatethesis"])
+            
+            mark.thesis_mark = thesis_mark
+            mark.final_mark = thesis_mark
+            session_connect.commit()
+    return render_template("markstudent.html",mark=mark)
+   
+
+
+@marks.route("/showmark",methods=['GET','POST'])
+def showmark():
+    mark = session_connect.query(Marks).filter(Marks.studentnum==session['user']).first()
+    return render_template("showmark.html",mark=mark)
+

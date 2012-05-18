@@ -97,11 +97,15 @@
 
 
 <form method="post" action="{{ url_for('marks.markstudent',studentid=session["studentid"]) }}"  class="iform">
-<ul>
-<li class="iheader">打分</li>
-<li><label for="">论文翻译</label><input class="itext" type="text" name="trans_thesis" id="trans_thesis" /></li>
-<li><label for="">论文</label><input class="itext" type="text" name="thesis" id="thesis" /></li>
-<input type="submit" class="button"  name="confirm" id="confirm" value="提交" /></li>
+    <ul>
+{% if mark %}
+<li class="iheader">已打分:{{ mark.final_mark }}</li>
+    <li><label for="">论文</label><input class="itext" type="text" name="updatethesis" id="updatethesis" /></li>
+{% else %}
+    <li class="iheader">打分</li>
+    <li><label for="">论文</label><input class="itext" type="text" name="thesis" id="thesis" /></li>
+    {% endif %}
+    <input type="submit" class="button"  name="confirm" id="confirm" value="提交" /></li>
 </ul>
 </form>
 {% endblock %}

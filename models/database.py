@@ -62,17 +62,21 @@ class Thesis(Base):
     thesisname = Column(String(100))
     thesispath = Column(String(250))
     thesisuptime = Column(String(100))
-    studentno = Column(String(20))
-    teacherno = Column(String(20))
+    studentnum = Column(String(20))
+    studentname = Column(String(30))
+    teachername = Column(String(30))
+    teachernum = Column(String(20))
     time = Column(String(100))
 
-    def __init__(self,thesisname=None,thesispath=None,thesisuptime=None,studentno=None,teacherno=None,time=None):
+    def __init__(self,thesisname=None,thesispath=None,thesisuptime=None,studentnum=None,teachernum=None,time=None,studentname=None,teachername=None):
         self.thesisname = thesisname
         self.thesispath = thesispath
         self.thesisuptime = thesisuptime
-        self.studentno = studentno
-        self.teacherno = teacherno
+        self.studentnum = studentnum
+        self.teachernum = teachernum
         self.time = time
+        self.studentname = studentname
+        self.teachername = teachername
 
 
 

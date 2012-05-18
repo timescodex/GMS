@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block body %}
+<section class=row> 
+<div>
+{% if mark %}
+    你的成绩是:{{ mark.final_mark }}
+{% else %}
+    你到现在还没有成绩
+{% endif %}
+</div>
+</section>
+{% endblock%}

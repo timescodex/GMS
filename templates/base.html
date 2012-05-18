@@ -90,7 +90,7 @@
             	<li><a href={{ url_for('st.selecttask') }}>选择任务</a></li>
 		{% if session["role"]=="teacher" %}
                 <li><a href={{ url_for('st.createtask') }}>发布任务</a></li>
-		<li><a href="#">论文查看</a></li>
+                <li><a href={{ url_for("thesis.collectthesis") }}>论文查看</a></li>
 		<li><a href="#">查看进度</a></li>
 		<li><a href={{ url_for("marks.selectstudent")}}>评分</a></li>
 		<li><a href="#">打印成绩单</a></li>
@@ -103,7 +103,9 @@
         <li><a href="#">查看成绩</a></li>
 		{% endif %}
 		<li><a href={{ url_for('pf.profile') }}>个人信息</a></li>
-                <li><a href="http://ssdut.dlut.edu.cn/">SSDUT</a></li>
+        <li><a href="http://ssdut.dlut.edu.cn/">SSDUT</a></li>
+        <li><a href={{ url_for('app_login.logout') }}>退出</a></li>
+
             </ul>
         </nav>
       <div class="clear"></div>

@@ -64,11 +64,8 @@ def publish():
                 progressname = request.form['name']
                 progresscontent = request.form['content']
                 if progressname:
-                    print "run into progress"
                     if progresscontent:
-                        print session["user"]
                         user = session_connect.query(User).filter(User.num==session["user"]).first()
-                        print user.name
                         progress = Progress(name = progressname,content = progresscontent,studentnum=session["user"],studentname=user.name)
                         session_connect.add(progress)
                         session_connect.commit()
@@ -107,57 +104,6 @@ def showdetail(pid):
 
 
 
-"""
-@st.route("/confirmselect",methods=['GET','POST'])
-def confirmselect():
-    if session["tid"]:
-        task = session_connect.query(Task).filter(Task.id==session["tid"]).first()
-        task.select_student = session["user"]
-        user = session_connect.query(User).filter(User.num==session["user"]).first()
-        task.studentname = user.name
-        #session_connect.add(task)
-        session_connect.commit()
-     
-    return redirect(url_for("st.selecttask"))
-
-
-@st.route("/delete",methods=['GET','POST'])
-def delete():
-    if session["tid"]:
-        task = session_connect.query(Task).filter(Task.id==session["tid"]).first()
-        session_connect.delete(task)
-        session_connect.commit()
-
-    return redirect(url_for("st.selecttask"))
-
-
-
-@st.route("/edit",methods=['GET','POST'])
-def edit():
-    print session["tid"]
-    print session["role"]
-    if session["tid"]:
-        task = session_connect.query(Task).filter(Task.id==session["tid"]).first()
-        if session["role"]=="teacher":
-            if session['user']:
-                if request.method == 'POST':
-                    taskname = request.form['taskname']
-                    taskcontent = request.form['content']
-                    if taskname:
-                        print "run into taskname"
-                        if taskcontent:
-                            task.name = taskname
-                            task.content = taskcontent
-                            session_connect.commit() 
-                            return redirect(url_for("st.edit"))
-
-    return render_template("edit_task.html",task=task)
-
-"""
-
-
-#if __name__=="__main__":
-#    st.run(debug=True)
 
 
 

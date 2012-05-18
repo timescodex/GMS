@@ -2,8 +2,8 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 import sys
 sys.path.append("..")
-from database import Task,session_connect
-from database import session_connect,Task
+from models.database import Task,session_connect
+from models.database import session_connect,Task
 
 from reportlab.lib.pagesizes import letter
 def task_teacher():
