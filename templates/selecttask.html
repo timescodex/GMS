@@ -122,21 +122,23 @@ input {
         <div class="col col_4"><h5>&nbsp;&nbsp;&nbsp;&nbsp;导师</h5></div>
         <div class="col col_4"><h5>学生</h5></div>
 	{% if tasks%}
-	  {% for task in tasks %}
+       {% for task in tasks %}
+        {% if task %}
           <div class="row" style="height:80px">
-            <div class="col col_1">&nbsp;&nbsp;</div>
+              <div class="col col_1">&nbsp;&nbsp;</div>
+            
             <div class="col col_6"><h5><a href="{{ url_for('st.showdetail',tid= task.id ) }}">{{ task.name }}</a></h5></div>
             <div class="col col_4"><h5><a href="{{ url_for('pf.showinfo',userid=task.pub_teacher) }}">{{ task.teachername }}</a></h5></div>
 	    {% if task.studentname %}
-            <div class="col col_4"><h5><a href="{{ url_for('pf.showinfo',userid=task.select_student) }}">{{ task.studentname }}</a></h5></div>
+        <div class="col col_4"><h5><a href="{{ url_for('pf.showinfo',userid=task.select_student) }}">{{ task.studentname }}</a></h5></div>
 	    {% else %}
 	    <div class="col col_4"><h5>"未选择"</h5></div>
-	    {% endif %}
-            <li class="iheader"></li>
+        {% endif %}
+        {%endif%}
+
             <div class="clear"></div>
           </div><!-- row -->
           <div class="row">
-          <hr size="15" align="left"  color="black">
           </div>
          {% endfor %}
 	{% else %}

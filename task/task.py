@@ -99,7 +99,7 @@ def selecttask(page):
     if request.method == 'POST':
         content = request.form['what']
         teacher = request.form['who']
-        server = xmlrpclib.ServerProxy('http://localhost:8000')
+        server = xmlrpclib.ServerProxy('http://localhost:8001')
     if content and teacher:
            #search by content and teacher
         print content

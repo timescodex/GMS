@@ -12,11 +12,11 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ('/RPC2',)
 
 
-server = SimpleXMLRPCServer(("localhost", 8000), requestHandler=RequestHandler)
+server = SimpleXMLRPCServer(("localhost", 8001), requestHandler=RequestHandler)
 
 server.register_introspection_functions()
 
-DBPATH = "/home/yang/Graduation_4.6/search_result"
+DBPATH = "/home/liyang/SearchDB"
 SEARCH_DB = xapian.WritableDatabase(DBPATH,xapian.DB_CREATE_OR_OPEN)
 SEARCH_ENQUIRE = xapian.Enquire(SEARCH_DB)
 
@@ -25,6 +25,7 @@ def flush_db():
 
 #建立索引：
 def index_txt(id,txt):
+    print id
     doc = xapian.Document()
     for word,value in seg_txt_2_dict(txt).iteritems():
         doc.add_term(word,value)
@@ -34,6 +35,7 @@ def index_txt(id,txt):
 
 def search(keywords,offset=0,limit=35,enquire=SEARCH_ENQUIRE):
     import pdb
+    print keywords
     #pdb.set_trace()
     query_list = []
     for word,value in seg_txt_2_dict(keywords).iteritems():
@@ -50,10 +52,16 @@ def search(keywords,offset=0,limit=35,enquire=SEARCH_ENQUIRE):
     matches = enquire.get_mset(offset,limit,None)
     
     dictsort = {}
-    
+     
     for m in matches:
-	dictsort[m.docid] = m.rank
-    print dictsort
+        dictsort[m.docid] = m.rank
+        print m.docid
+        print dir(m)
+        print m.get_docid()
+        print dir(m.document)
+        print m.document.get_docid()
+    
+    #print dictsort
     ids = sorted(dictsort,key=dictsort.get)
     ids.reverse()
     print ids
@@ -64,10 +72,10 @@ server.register_function(search)
 if __name__ == "__main__":
     
     flush_db()
-    matches = search("Test Test")
-    print matches
-    for m in matches:
-        print "%i: %i%% docid=%i [%s]" % (m.rank + 1, m.percent, m.docid, m.document.get_data())
+    #matches = search("Test Test")
+    #print matches
+    #for m in matches:
+    #    print "%i: %i%% docid=%i [%s]" % (m.rank + 1, m.percent, m.docid, m.document.get_data())
     print "the search server is running!"
     server.serve_forever()
     print "the search server out of run"
